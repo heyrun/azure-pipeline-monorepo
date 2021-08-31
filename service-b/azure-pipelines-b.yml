@@ -1,0 +1,27 @@
+# Build numbering format
+name: $(BuildID)
+
+variables:
+  - name: working-dir
+    value: 'service-b/'
+
+trigger:
+  branches:
+    include:
+      - master
+      - feat/*
+  paths:
+    include:
+      - 'service-b/*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Hello from 'service-b'"
+
+- script: npm install
+  workingDirectory: $(working-dir)
+
+- script: npm run chalk
+  workingDirectory: $(working-dir)
